@@ -1,0 +1,161 @@
+1. C:\WINDOWS\system32>sqlplus scott/tiger
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed May 23 14:05:17 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL>
+
+2. False
+
+3. True
+
+4. True
+
+5. SELECT statement cannot be on different lines, salary is the incorrect column name, X should be * for multiplication,
+ANNUAL SALARY must be inside "".
+
+6.SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                    NOT NULL VARCHAR2(2)
+ DNAME                                     NOT NULL VARCHAR2(30)
+ LOC                                                VARCHAR2(30)
+
+SQL> SELECT * FROM dept;
+
+DE DNAME                          LOC
+-- ------------------------------ ------------------------------
+10 ACCOUNTING                     NEW YORK
+20 RESEARCH                       DALLAS
+30 SALES                          CHICAGO
+40 OPERATIONS                     BOSTON
+
+7.SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL VARCHAR2(4)
+ ENAME                                     NOT NULL VARCHAR2(15)
+ JOB                                       NOT NULL VARCHAR2(15)
+ MGR                                                VARCHAR2(4)
+ HIREDATE                                  NOT NULL DATE
+ SAL                                       NOT NULL NUMBER
+ COMM                                               NUMBER
+ DEPTNO                                             VARCHAR2(2)
+
+
+8. SQL> start p1q7.sql
+
+EMPN ENAME           JOB             HIREDATE
+---- --------------- --------------- ---------
+7839 KING            PRESIDENT       17-NOV-81
+7698 BLAKE           MANAGER         01-MAY-81
+7782 CLARK           MANAGER         09-JUN-81
+7566 JONES           MANAGER         02-APR-81
+7654 MARTIN          SALESMAN        28-SEP-81
+7499 ALLEN           SALESMAN        20-FEB-81
+7844 TURNER          SALESMAN        08-SEP-81
+7900 JAMES           CLERK           03-DEC-81
+7521 WARD            SALESMAN        22-FEB-81
+7902 FORD            ANALYST         03-DEC-81
+7369 SMITH           CLERK           17-DEC-80
+
+EMPN ENAME           JOB             HIREDATE
+---- --------------- --------------- ---------
+7788 SCOTT           ANALYST         09-DEC-82
+7876 ADAMS           CLERK           12-JAN-83
+7934 MILLER          CLERK           23-JAN-82
+
+14 rows selected.
+
+9. SQL> SELECT DISTINCT job
+  2  FROM emp;
+
+JOB
+---------------
+SALESMAN
+CLERK
+PRESIDENT
+MANAGER
+ANALYST
+
+10. 
+Emp# Employee        Job             Hire Date
+---- --------------- --------------- ---------
+7839 KING            PRESIDENT       17-NOV-81
+7698 BLAKE           MANAGER         01-MAY-81
+7782 CLARK           MANAGER         09-JUN-81
+7566 JONES           MANAGER         02-APR-81
+7654 MARTIN          SALESMAN        28-SEP-81
+7499 ALLEN           SALESMAN        20-FEB-81
+7844 TURNER          SALESMAN        08-SEP-81
+7900 JAMES           CLERK           03-DEC-81
+7521 WARD            SALESMAN        22-FEB-81
+7902 FORD            ANALYST         03-DEC-81
+7369 SMITH           CLERK           17-DEC-80
+
+Emp# Employee        Job             Hire Date
+---- --------------- --------------- ---------
+7788 SCOTT           ANALYST         09-DEC-82
+7876 ADAMS           CLERK           12-JAN-83
+7934 MILLER          CLERK           23-JAN-82
+
+14 rows selected.
+
+11.
+SQL> SELECT ename||', '||job as "Employee and Title"
+  2  FROM emp;
+
+Employee and Title
+--------------------------------
+KING, PRESIDENT
+BLAKE, MANAGER
+CLARK, MANAGER
+JONES, MANAGER
+MARTIN, SALESMAN
+ALLEN, SALESMAN
+TURNER, SALESMAN
+JAMES, CLERK
+WARD, SALESMAN
+FORD, ANALYST
+SMITH, CLERK
+
+Employee and Title
+--------------------------------
+SCOTT, ANALYST
+ADAMS, CLERK
+MILLER, CLERK
+
+14 rows selected.
+
+12.
+SQL> SELECT empno||', '||ename||', '||job||', '||mgr||', '||hiredate||', '||sal||', '||comm||', '||deptno AS"THE_OUTPUT"
+  2  FROM emp;
+
+THE_OUTPUT
+--------------------------------------------------------------------------------
+7839, KING, PRESIDENT, , 17-NOV-81, 5000, , 10
+7698, BLAKE, MANAGER, 7839, 01-MAY-81, 2850, , 30
+7782, CLARK, MANAGER, 7839, 09-JUN-81, 2450, , 10
+7566, JONES, MANAGER, 7839, 02-APR-81, 2975, , 20
+7654, MARTIN, SALESMAN, 7698, 28-SEP-81, 1250, 1400, 30
+7499, ALLEN, SALESMAN, 7698, 20-FEB-81, 1600, 300, 30
+7844, TURNER, SALESMAN, 7698, 08-SEP-81, 1500, 0, 30
+7900, JAMES, CLERK, 7698, 03-DEC-81, 950, , 30
+7521, WARD, SALESMAN, 7698, 22-FEB-81, 1250, 500, 30
+7902, FORD, ANALYST, 7566, 03-DEC-81, 3000, , 20
+7369, SMITH, CLERK, 7902, 17-DEC-80, 800, , 20
+
+THE_OUTPUT
+--------------------------------------------------------------------------------
+7788, SCOTT, ANALYST, 7566, 09-DEC-82, 3000, , 20
+7876, ADAMS, CLERK, 7788, 12-JAN-83, 1100, , 20
+7934, MILLER, CLERK, 7782, 23-JAN-82, 1300, , 10
+
+14 rows selected.
+
+SQL>

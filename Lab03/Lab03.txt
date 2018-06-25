@@ -1,0 +1,289 @@
+1.
+SQL> SELECT to_char(sysdate, 'DD-MON-YY') "Date"
+  2  FROM dual;
+
+Date
+--------
+05-JUN-18
+
+2.SELECT empno, ename, sal, TRUNC(sal * 1.15, 0) AS "New Salary" FROM emp;
+
+3.
+SQL> start p3q2.sql
+
+EMPN ENAME                  SAL New Salary
+---- --------------- ---------- ----------
+7839 KING                  5000       5750
+7698 BLAKE                 2850       3277
+7782 CLARK                 2450       2817
+7566 JONES                 2975       3421
+7654 MARTIN                1250       1437
+7499 ALLEN                 1600       1840
+7844 TURNER                1500       1725
+7900 JAMES                  950       1092
+7521 WARD                  1250       1437
+7902 FORD                  3000       3450
+7369 SMITH                  800        920
+
+EMPN ENAME                  SAL New Salary
+---- --------------- ---------- ----------
+7788 SCOTT                 3000       3450
+7876 ADAMS                 1100       1265
+7934 MILLER                1300       1495
+
+14 rows selected.
+
+4.
+SQL> start p3q2.sql
+
+EMPN ENAME                  SAL New Salary   Increase
+---- --------------- ---------- ---------- ----------
+7839 KING                  5000       5750        750
+7698 BLAKE                 2850       3277        427
+7782 CLARK                 2450       2817        367
+7566 JONES                 2975       3421        446
+7654 MARTIN                1250       1437        187
+7499 ALLEN                 1600       1840        240
+7844 TURNER                1500       1725        225
+7900 JAMES                  950       1092        142
+7521 WARD                  1250       1437        187
+7902 FORD                  3000       3450        450
+7369 SMITH                  800        920        120
+
+EMPN ENAME                  SAL New Salary   Increase
+---- --------------- ---------- ---------- ----------
+7788 SCOTT                 3000       3450        450
+7876 ADAMS                 1100       1265        165
+7934 MILLER                1300       1495        195
+
+14 rows selected.
+
+5.
+SQL> SELECT ename, hiredate, INITCAP(TO_CHAR(ADD_MONTHS (hiredate, 6), 'fmDAY", the "DDSPTH" of "MONTH", "YYYY')) AS "REVIEW"
+  2  FROM emp;
+
+ENAME           HIREDATE  REVIEW
+--------------- --------- ------------------------------------------------------------------------------------------------------
+KING            17-NOV-81 Monday, The Seventeenth Of May, 1982
+BLAKE           01-MAY-81 Sunday, The First Of November, 1981
+CLARK           09-JUN-81 Wednesday, The Ninth Of December, 1981
+JONES           02-APR-81 Friday, The Second Of October, 1981
+MARTIN          28-SEP-81 Sunday, The Twenty-Eighth Of March, 1982
+ALLEN           20-FEB-81 Thursday, The Twentieth Of August, 1981
+TURNER          08-SEP-81 Monday, The Eighth Of March, 1982
+JAMES           03-DEC-81 Thursday, The Third Of June, 1982
+WARD            22-FEB-81 Saturday, The Twenty-Second Of August, 1981
+FORD            03-DEC-81 Thursday, The Third Of June, 1982
+SMITH           17-DEC-80 Wednesday, The Seventeenth Of June, 1981
+
+ENAME           HIREDATE  REVIEW
+--------------- --------- ------------------------------------------------------------------------------------------------------
+SCOTT           09-DEC-82 Thursday, The Ninth Of June, 1983
+ADAMS           12-JAN-83 Tuesday, The Twelfth Of July, 1983
+MILLER          23-JAN-82 Friday, The Twenty-Third Of July, 1982
+
+14 rows selected.
+
+6.
+SQL> SELECT ename, ROUND(MONTHS_BETWEEN(sysdate, hiredate), 0) AS "MONTHS_WORKED"
+  2  FROM emp;
+
+ENAME           MONTHS_WORKED
+--------------- -------------
+KING                      439
+BLAKE                     445
+CLARK                     444
+JONES                     446
+MARTIN                    440
+ALLEN                     448
+TURNER                    441
+JAMES                     438
+WARD                      447
+FORD                      438
+SMITH                     450
+
+ENAME           MONTHS_WORKED
+--------------- -------------
+SCOTT                     426
+ADAMS                     425
+MILLER                    436
+
+14 rows selected.
+
+7.
+SQL> SELECT ename||' earns '
+  2  ||TO_CHAR(sal, 'fm$99,999.00')
+  3  ||' monthly but wants '
+  4  ||TO_CHAR(sal * 3, 'fm$99,999.00')
+  5  AS "Dream Salaries"
+  6  FROM emp;
+
+Dream Salaries
+---------------------------------------------------------------
+KING earns $5,000.00 monthly but wants $15,000.00
+BLAKE earns $2,850.00 monthly but wants $8,550.00
+CLARK earns $2,450.00 monthly but wants $7,350.00
+JONES earns $2,975.00 monthly but wants $8,925.00
+MARTIN earns $1,250.00 monthly but wants $3,750.00
+ALLEN earns $1,600.00 monthly but wants $4,800.00
+TURNER earns $1,500.00 monthly but wants $4,500.00
+JAMES earns $950.00 monthly but wants $2,850.00
+WARD earns $1,250.00 monthly but wants $3,750.00
+FORD earns $3,000.00 monthly but wants $9,000.00
+SMITH earns $800.00 monthly but wants $2,400.00
+
+Dream Salaries
+---------------------------------------------------------------
+SCOTT earns $3,000.00 monthly but wants $9,000.00
+ADAMS earns $1,100.00 monthly but wants $3,300.00
+MILLER earns $1,300.00 monthly but wants $3,900.00
+
+14 rows selected.
+
+8.
+SQL> SELECT ename, LPAD(sal, 15, '$') AS "SALARY"
+  2  FROM emp;
+
+ENAME           SALARY
+--------------- ------------------------------------------------------------
+KING            $$$$$$$$$$$5000
+BLAKE           $$$$$$$$$$$2850
+CLARK           $$$$$$$$$$$2450
+JONES           $$$$$$$$$$$2975
+MARTIN          $$$$$$$$$$$1250
+ALLEN           $$$$$$$$$$$1600
+TURNER          $$$$$$$$$$$1500
+JAMES           $$$$$$$$$$$$950
+WARD            $$$$$$$$$$$1250
+FORD            $$$$$$$$$$$3000
+SMITH           $$$$$$$$$$$$800
+
+ENAME           SALARY
+--------------- ------------------------------------------------------------
+SCOTT           $$$$$$$$$$$3000
+ADAMS           $$$$$$$$$$$1100
+MILLER          $$$$$$$$$$$1300
+
+14 rows selected.
+
+9.
+SQL> SELECT INITCAP(ename) AS "Name", LENGTH(ename) AS "Length"
+  2  FROM emp
+  3  WHERE ename LIKE 'A%' OR ename LIKE 'J%' OR ename LIKE 'M%';
+
+Name                Length
+--------------- ----------
+Jones                    5
+Martin                   6
+Allen                    5
+James                    5
+Adams                    5
+Miller                   6
+
+6 rows selected.
+
+10.
+SQL> SELECT ename, hiredate, TO_CHAR(hiredate, 'DAY') AS "Day"
+  2  FROM emp
+  3  ORDER BY TO_CHAR(hiredate -1, 'D') ;
+
+ENAME           HIREDATE  Day
+--------------- --------- ------------------------------------
+MARTIN          28-SEP-81 MONDAY
+CLARK           09-JUN-81 TUESDAY
+KING            17-NOV-81 TUESDAY
+TURNER          08-SEP-81 TUESDAY
+SMITH           17-DEC-80 WEDNESDAY
+ADAMS           12-JAN-83 WEDNESDAY
+JONES           02-APR-81 THURSDAY
+SCOTT           09-DEC-82 THURSDAY
+FORD            03-DEC-81 THURSDAY
+JAMES           03-DEC-81 THURSDAY
+ALLEN           20-FEB-81 FRIDAY
+
+ENAME           HIREDATE  Day
+--------------- --------- ------------------------------------
+BLAKE           01-MAY-81 FRIDAY
+MILLER          23-JAN-82 SATURDAY
+WARD            22-FEB-81 SUNDAY
+
+14 rows selected.
+
+11.
+SQL> SELECT ename, NVL(TO_CHAR(comm), 'No Commission') AS "COMM"
+  2  FROM emp;
+
+ENAME           COMM
+--------------- ----------------------------------------
+KING            No Commission
+BLAKE           No Commission
+CLARK           No Commission
+JONES           No Commission
+MARTIN          1400
+ALLEN           300
+TURNER          0
+JAMES           No Commission
+WARD            500
+FORD            No Commission
+SMITH           No Commission
+
+ENAME           COMM
+--------------- ----------------------------------------
+SCOTT           No Commission
+ADAMS           No Commission
+MILLER          No Commission
+
+14 rows selected.
+
+12.
+SQL> SELECT RPAD(ename, 10, ' ')||' '||LPAD(' ',ROUND(sal/100, 0),'*') AS "EMPLOYEE_AND_THEIR_SALARIES"
+  2  FROM emp
+  3  ORDER BY sal DESC;
+
+EMPLOYEE_AND_THEIR_SALARIES
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+KING       *************************************************
+SCOTT      *****************************
+FORD       *****************************
+JONES      *****************************
+BLAKE      ****************************
+CLARK      ************************
+ALLEN      ***************
+TURNER     **************
+MILLER     ************
+WARD       ************
+MARTIN     ************
+ADAMS      **********
+JAMES      *********
+SMITH      *******
+
+14 rows selected.
+
+13.
+SQL> SELECT job,
+  2  DECODE (job, 'PRESIDENT', 'A',
+  3  'MANAGER', 'B',
+  4  'ANALYST', 'C',
+  5  'SALESMAN', 'D',
+  6  'CLERK', 'E',
+  7  'O') AS "GRADE"
+  8  FROM emp;
+
+JOB             G
+--------------- -
+PRESIDENT       A
+MANAGER         B
+MANAGER         B
+MANAGER         B
+SALESMAN        D
+SALESMAN        D
+SALESMAN        D
+CLERK           E
+SALESMAN        D
+ANALYST         C
+CLERK           E
+ANALYST         C
+CLERK           E
+CLERK           E
+
+14 rows selected.

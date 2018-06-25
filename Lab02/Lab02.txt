@@ -1,0 +1,150 @@
+1.
+SQL> start p2q1.sql
+
+ENAME                  SAL
+--------------- ----------
+KING                  5000
+JONES                 2975
+FORD                  3000
+SCOTT                 3000
+
+
+2.
+SQL> SELECT ename, deptno
+  2  FROM emp
+  3  WHERE empno = 7566;
+
+ENAME           DE
+--------------- --
+JONES           20
+
+3.
+SQL> start p2q3.sql
+
+ENAME                  SAL
+--------------- ----------
+KING                  5000
+JONES                 2975
+MARTIN                1250
+JAMES                  950
+WARD                  1250
+FORD                  3000
+SMITH                  800
+SCOTT                 3000
+ADAMS                 1100
+MILLER                1300
+
+10 rows selected.
+
+4.
+SQL> SELECT ename, job, hiredate
+  2  FROM emp
+  3  WHERE hiredate BETWEEN '20-FEB-81' AND '01-MAY-81'
+  4  ORDER BY hiredate;
+
+ENAME           JOB             HIREDATE
+--------------- --------------- ---------
+ALLEN           SALESMAN        20-FEB-81
+WARD            SALESMAN        22-FEB-81
+JONES           MANAGER         02-APR-81
+BLAKE           MANAGER         01-MAY-81
+
+5.
+SQL> SELECT ename, deptno
+  2  FROM emp
+  3  WHERE deptno = '10' OR deptno = '30';
+
+ENAME           DE
+--------------- --
+KING            10
+BLAKE           30
+CLARK           10
+MARTIN          30
+ALLEN           30
+TURNER          30
+JAMES           30
+WARD            30
+MILLER          10
+
+9 rows selected.
+
+6.
+SQL> start p2q6.sql
+
+ENAME                  SAL
+--------------- ----------
+KING                  5000
+BLAKE                 2850
+CLARK                 2450
+ALLEN                 1600
+
+7.
+SQL> SELECT ename, hiredate
+  2  FROM emp
+  3  WHERE hiredate BETWEEN '01-JAN-82' AND '31-DEC-82';
+
+ENAME           HIREDATE
+--------------- ---------
+SCOTT           09-DEC-82
+MILLER          23-JAN-82
+
+8.
+SQL> SELECT ename, job
+  2  FROM emp
+  3  WHERE mgr IS NULL;
+
+ENAME           JOB
+--------------- ---------------
+KING            PRESIDENT
+
+9.
+SQL> SELECT ename, sal, comm
+  2  FROM emp
+  3  WHERE comm IS NOT NULL;
+
+ENAME                  SAL       COMM
+--------------- ---------- ----------
+MARTIN                1250       1400
+ALLEN                 1600        300
+TURNER                1500          0
+WARD                  1250        500
+
+10.
+SQL> SELECT ename
+  2  FROM emp
+  3  WHERE ename LIKE '__A%';
+
+ENAME
+---------------
+BLAKE
+CLARK
+ADAMS
+
+11.
+SQL> SELECT ename
+  2  FROM emp
+  3  WHERE ename LIKE '%L%L%' AND deptno = '30' OR mgr = '7782';
+
+ENAME
+---------------
+ALLEN
+MILLER
+
+12.
+SQL> SELECT ename, job, sal
+  2  FROM emp
+  3  WHERE (job = 'CLERK' OR job = 'ANALYST') AND sal NOT IN (1000, 3000, 5000);
+
+ENAME           JOB                    SAL
+--------------- --------------- ----------
+JAMES           CLERK                  950
+SMITH           CLERK                  800
+ADAMS           CLERK                 1100
+MILLER          CLERK                 1300
+
+13.
+SQL> start p2q13.sql
+
+ENAME                  SAL       COMM
+--------------- ---------- ----------
+MARTIN                1250       1400

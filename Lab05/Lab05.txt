@@ -1,0 +1,118 @@
+1. True
+
+2. False
+
+3. True
+
+4. 
+SELECT ROUND(MAX(sal), 0) Maximum, ROUND(MIN(sal), 0) Minimum, ROUND(SUM(sal), 0) Sum, ROUND(AVG(sal), 0) Average 
+FROM emp;
+
+SQL> start p5q4.sql
+
+   MAXIMUM    MINIMUM        SUM    AVERAGE
+---------- ---------- ---------- ----------
+      5000        800      29025       2073
+
+5.
+SELECT job, ROUND(MAX(sal), 0) Maximum, ROUND(MIN(sal), 0) Minimum, ROUND(SUM(sal), 0) Sum, ROUND(AVG(sal), 0) Average
+FROM emp
+GROUP BY job;
+
+SQL> start p5q4.sql
+
+JOB                MAXIMUM    MINIMUM        SUM    AVERAGE
+--------------- ---------- ---------- ---------- ----------
+SALESMAN              1600       1250       5600       1400
+CLERK                 1300        800       4150       1038
+PRESIDENT             5000       5000       5000       5000
+MANAGER               2975       2450       8275       2758
+ANALYST               3000       3000       6000       3000
+
+6.
+SQL> SELECT job, COUNT(job)
+  2  FROM emp
+  3  GROUP BY job;
+
+JOB             COUNT(JOB)
+--------------- ----------
+SALESMAN                 4
+CLERK                    4
+PRESIDENT                1
+MANAGER                  3
+ANALYST                  2
+
+7.
+SQL> SELECT COUNT(job) AS "Number of Managers"
+  2  FROM emp
+  3  WHERE job='MANAGER';
+
+Number of Managers
+------------------
+                 3
+
+8.
+SQL> SELECT MAX(sal) - MIN(sal) AS "DIFFERENCE"
+  2  FROM emp;
+
+DIFFERENCE
+----------
+      4200
+
+9.
+SQL> SELECT DISTINCT(mgr), MIN(sal)
+  2  FROM emp
+  3  WHERE mgr IS NOT NULL
+  4  GROUP BY mgr
+  5  HAVING MIN(sal)>1000
+  6  ORDER BY MIN(sal) DESC;
+
+MGR    MIN(SAL)
+---- ----------
+7566       3000
+7839       2450
+7782       1300
+7788       1100
+
+10.
+SQL> column dname format a10
+SQL> column loc format a10
+SQL> SELECT dname, loc, COUNT(*) AS "Number of People", AVG(sal) AS "Salary"
+  2  from dept, emp
+  3  WHERE dept.deptno = emp.deptno
+  4  GROUP BY dname, loc;
+
+DNAME      LOC        Number of People     Salary
+---------- ---------- ---------------- ----------
+RESEARCH   DALLAS                    5       2175
+SALES      CHICAGO                   6 1566.66667
+ACCOUNTING NEW YORK                  3 2916.66667
+
+11.
+SQL> SELECT COUNT(*) AS "TOTAL",
+  2  SUM(DECODE(TO_CHAR(hiredate,'YYYY'),'1980', 1, 0)) AS "1980",
+  3  SUM(DECODE(TO_CHAR(hiredate,'YYYY'),'1981', 1, 0)) AS "1981",
+  4  SUM(DECODE(TO_CHAR(hiredate,'YYYY'),'1982', 1, 0)) AS "1982",
+  5  SUM(DECODE(TO_CHAR(hiredate,'YYYY'),'1987', 1, 0)) AS "1987"
+  6  FROM emp;
+
+     TOTAL       1980       1981       1982       1987
+---------- ---------- ---------- ---------- ----------
+        14          1         10          2          0
+
+12.
+SQL> SELECT DISTINCT(job),
+  2  SUM(DECODE(deptno,10,sal)) AS "Dept 10",
+  3  SUM(DECODE(deptno,20,sal)) AS "Dept 20",
+  4  SUM(DECODE(deptno,30,sal)) AS "Dept 30",
+  5  SUM(sal) AS "Total"
+  6  FROM emp
+  7  GROUP BY job;
+
+JOB                Dept 10    Dept 20    Dept 30      Total
+--------------- ---------- ---------- ---------- ----------
+SALESMAN                                    5600       5600
+CLERK                 1300       1900        950       4150
+PRESIDENT             5000                             5000
+MANAGER               2450       2975       2850       8275
+ANALYST                          6000                  6000
