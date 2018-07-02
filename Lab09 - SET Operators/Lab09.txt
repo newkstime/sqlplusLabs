@@ -1,0 +1,42 @@
+Lab for week 9
+
+
+1. Using HR schema, write a query that displays a list of department IDs for departments that do not contain the job ID ST_CLERK. Use the MINUS set operator to create this report.  
+
+SELECT department_id
+FROM employees
+MINUS
+SELECT department_id
+FROM employees
+WHERE job_id = 'ST_CLERK'
+ORDER BY 1;
+
+---optional---
+
+write a query that displays a list of department IDs except for those employees that are in Department 50. Use the MINUS set operator to create this report.  
+
+SELECT department_id
+FROM employees
+MINUS
+SELECT department_id
+FROM employees
+WHERE department_id = 50
+ORDER BY 1;
+
+
+
+2. Write a query to union the departments table with the employees table using the department id, department name, employee last name, and manager id.  Label the name columns as a generic heading called "Names".
+
+
+SELECT department_id, department_name, TO_CHAR (NULL) "Names", manager_id
+FROM departments
+UNION
+SELECT department_id, TO_CHAR (NULL), last_name "Names", manager_id
+FROM employees;
+
+
+
+
+3. Are there any duplicates in question #2 ?   How did you verify this ?
+
+No. The union operator eliminates duplicates.

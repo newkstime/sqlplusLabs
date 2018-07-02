@@ -1,0 +1,26 @@
+Lab for week 9
+
+
+1. Using HR schema, write a query that displays a list of department IDs for departments that do not contain the job ID ST_CLERK. Use the MINUS set operator to create this report.  
+
+
+
+---optional---
+
+write a query that displays a list of department IDs except for those employees that are in Department 50. Use the MINUS set operator to create this report.  
+
+
+
+
+
+2. Write a query to union the departments table with the employees table using the department id, department name, employee last name, and manager id.  Label the name columns as a generic heading called "Names".
+
+
+
+
+
+
+
+3. Are there any duplicates in question #2 ?   How did you verify this ?
+
+

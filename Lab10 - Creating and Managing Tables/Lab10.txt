@@ -1,0 +1,131 @@
+1)
+DESCRIBE Department;
+
+Name Null? Type         
+---- ----- ------------ 
+ID         NUMBER(7)    
+NAME       VARCHAR2(25) 
+
+2)
+INSERT INTO DEPARTMENT
+SELECT deptno, dname
+FROM dept;
+
+SELECT *
+FROM DEPARTMENT;
+
+ID	NAME
+10	ACCOUNTING
+20	RESEARCH
+30	SALES
+40	OPERATIONS
+
+3)
+CREATE TABLE employee
+(id NUMBER(7),
+last_name VARCHAR2(25),
+first_name VARCHAR2(25),
+dpet_id NUMBER(7));
+
+DESCRIBE employee;
+
+Name       Null? Type         
+---------- ----- ------------ 
+ID               NUMBER(7)    
+LAST_NAME        VARCHAR2(25) 
+FIRST_NAME       VARCHAR2(25) 
+DPET_ID          NUMBER(7)   
+
+4)
+ALTER TABLE employee
+MODIFY (LAST_NAME VARCHAR(36));
+
+DESCRIBE employee;
+
+Name       Null? Type         
+---------- ----- ------------ 
+ID               NUMBER(7)    
+LAST_NAME        VARCHAR2(36) 
+FIRST_NAME       VARCHAR2(25) 
+DPET_ID          NUMBER(7)  
+
+5)
+SELECT table_name
+FROM user_tables
+WHERE table_name = 'DEPARTMENT' OR 
+table_name = 'EMPLOYEE';
+
+TABLE_NAME
+DEPARTMENT
+EMPLOYEE
+
+6)
+CREATE TABLE EMPLOYEE2
+(ID, LAST_NAME, DEPT_ID)
+AS
+(SELECT EMPNO, ENAME, DEPTNO
+FROM emp);
+
+DESCRIBE EMPLOYEE2;
+
+Name      Null?    Type         
+--------- -------- ------------ 
+ID        NOT NULL VARCHAR2(4)  
+LAST_NAME NOT NULL VARCHAR2(15) 
+DEPT_ID            VARCHAR2(2)  
+
+7)
+DROP TABLE EMPLOYEE;
+
+8)
+RENAME EMPLOYEE2 TO EMPLOYEE;
+
+9)
+COMMENT ON TABLE EMPLOYEE
+IS 'Employees information';
+COMMENT ON TABLE DEPARTMENT
+IS 'department information';
+
+SELECT *
+FROM user_tab_comments;
+
+TABLE_NAME	TABLE_TYPE	COMMENTS
+DEPARTMENT	TABLE	department information
+EMPLOYEE	TABLE	Employees information
+EMP		TABLE	
+DEPT		TABLE	
+MY_EMPLOYEE	TABLE	
+SALGRADE	TABLE	
+
+10)
+ALTER TABLE EMPLOYEE
+DROP COLUMN LAST_NAME;
+
+Name    Null?    Type        
+------- -------- ----------- 
+ID      NOT NULL VARCHAR2(4) 
+DEPT_ID          VARCHAR2(2) 
+
+11)
+CREATE TABLE EMPLOYEE2
+(ID, LAST_NAME, DEPT_ID)
+AS
+(SELECT EMPNO, ENAME, DEPTNO
+FROM emp);
+
+ALTER TABLE EMPLOYEE2
+SET UNUSED (DEPT_ID);
+
+Name      Null?    Type         
+--------- -------- ------------ 
+ID        NOT NULL VARCHAR2(4)  
+LAST_NAME NOT NULL VARCHAR2(15) 
+
+12)
+ALTER TABLE EMPLOYEE2
+DROP UNUSED columns;
+
+Name      Null?    Type         
+--------- -------- ------------ 
+ID        NOT NULL VARCHAR2(4)  
+LAST_NAME NOT NULL VARCHAR2(15) 
